@@ -1,0 +1,26 @@
+html(lang='ja')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1.0')
+    link(rel="stylesheet" href="css/styles.css")
+    link(rel='icon', type='image/ png', size='16x16', href='image/vcicon.png')
+    title #{title}
+  body
+    header 
+    #app
+        .E
+        nav.menu(style='width:400px;height:500px')
+          ul.list
+            table.table
+              tr.tr 
+                th.th #{midasi1}
+                th.th #{midasi2}
+              - var x = 1
+              each shohin in list
+                tr.tr 
+                  td.td(id='shohincode'+`${x}` ondblclick='dbl(event.target.innerText,event.target.id)') #{shohin.shohincode}
+                  td.td #{shohin.shohinname}
+                  - x++ 
+    script(src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js')
+    script(src='script/program.js')
+    script(src='script/product.js')

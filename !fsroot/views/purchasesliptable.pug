@@ -1,0 +1,50 @@
+html(lang='ja')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1.0')
+    link(rel="stylesheet" href="css/styles.css")
+    link(rel='icon', type='image/ png', size='16x16', href='image/vcicon.png')
+    script(src='script/cmanCalendar_v093.js')
+    title #{title}
+  body
+    header 
+      li.top #{title}
+    #app
+      form.program(name='program' action='purchasesliptable1' method='POST' style='margin:20px')
+        .B
+          input(type='hidden' id='code' name='syukkacode')
+          p.koumoku(style='height:35px;margin-bottom:10px') 精算日　　　　：
+            input.nyu(name='kikan1' id='koumoku1' cmanCLDat='USE:ON,LANG:EN,FORM:3' type='text' autocomplete="off" style="width:100px") 
+            span 　～　
+            input.nyu(name='kikan2' id='koumoku2' cmanCLDat='USE:ON,LANG:EN,FORM:3' type='text' autocomplete="off" style="width:100px") 
+          p.koumoku(style='height:35px;margin-bottom:10px') 仕入先コード　：
+            input.nyu(name='purchasecode' id='koumoku3' type='text' autocomplete="off" style="width:100px") 
+          p.koumoku(style='height:35px;margin-bottom:10px') 商品コード　　：
+            input.nyu(name='shocode' id='koumoku4' type='text' autocomplete="off" style="width:100px")
+          li.button2(id='sub' style="margin-top:20px") 検索
+        .E
+          nav.menu(style='width:1330px;height:600px;margin-left:-20px;margin-top:-30px')
+            ul.list
+              table.table
+                tr.tr 
+                  th.th(style='width:140px') #{midasi1}
+                  th.th(style='width:130px') #{midasi2}
+                  th.th(style='width:130px') #{midasi3}
+                  th.th(style='width:350px') #{midasi4}
+                  th.th(style='width:130px') #{midasi5}
+                  th.th(style='width:350px') #{midasi6}
+                  th.th(style='width:100px') #{midasi7}
+                - var x = 1
+                each purchaseslip in list
+                  tr.tr 
+                    td.td( id='purchasecode'+`${x}` ondblclick='dbl(event.target.innerText,event.target.id)') #{purchaseslip.purchaseslipcode}
+                    td.td #{purchaseslip.payoffdate}
+                    td.td #{purchaseslip.purchasecode}
+                    td.td #{purchaseslip.purchasename1}
+                    td.td #{purchaseslip.productcode}
+                    td.td #{purchaseslip.productname}
+                    td.td #{purchaseslip.quantity}
+                    - x++ 
+    script(src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js')
+    script(src='script/program.js')
+    script(src='script/purchasesliptable.js')

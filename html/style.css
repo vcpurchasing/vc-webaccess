@@ -1,0 +1,40 @@
+
+header{
+  text-align: center;
+  background-color: #000000;
+  opacity: 0.85;
+  color: #ffffff;
+  padding: 30px;
+  text-shadow: 1px 2px 3px #000000;
+}
+body{
+    background-color: #ffffff;
+  margin: 0px ;
+  padding: 0px;
+  text-shadow: 1px 2px 3px #000000;
+}
+form{
+  text-align: center;
+  margin: 0px 130px;
+  padding: 0px ;
+}
+footer{
+    width: 100%;
+    text-align: center;
+    background-color: #ffffff;
+    position: absolute;
+    bottom: 0;
+}
+.wrapper{
+    padding-bottom: 120px;
+}
+
+.userid{
+  margin: 50px 0 0;
+}
+.userpw{
+  margin: 30px;
+}
+.submit{
+  margin: 0px 0px 0px 130px;
+}

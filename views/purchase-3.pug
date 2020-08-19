@@ -1,0 +1,116 @@
+html(lang='ja')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1.0')
+    link(rel="stylesheet" href="css/styles.css")
+    link(rel='icon', type='image/ png', size='16x16', href='image/vcicon.png')
+    script(src='script/cmanCalendar_v093.js')
+    script(type='text/javascript').
+      function selectboxChange(a) {
+        document.getElementById("koumoku4").value = document.getElementById("jimucode" + (a - 1)).innerText
+      }
+    title #{title}
+  
+  body
+    header 
+      li.TOP(id='top') ＴＯＰ
+      li.TOPs ＞＞
+      li.TOP(id='top' ) #{title}
+    #app
+      .A
+        br
+        h2 プログラム一覧
+          br
+        nav.menu(style='border-top: solid #1e366a 1px;border-bottom: solid #1e366a 1px;margin-left:39px')
+            ul.list
+              .D
+                li.masuta(v-for="list in lists" v-on:mouseover="loadlist(list.method)" v-bind:id="list.id" ) {{list.value}}
+              .F(v-show="is__select1")
+                li.masuta2(v-for="masutalist in masuta" v-bind:id="masutalist.id" ) {{masutalist.value}}
+              .F(v-show="is__select2")
+                li.masuta2(v-for="Salelist in Sales" v-bind:id="Salelist.id" ) {{Salelist.value}}
+              .F(v-show="is__select3")
+                li.masuta2(v-for="Purchaselist in Purchase" v-bind:id="Purchaselist.id" ) {{Purchaselist.value}}
+              .F(v-show="is__select4")
+                li.masuta2(v-for="stocklist in Stock" v-bind:id="stocklist.id" ) {{stocklist.value}}
+              .F(v-show="is__select5")
+                li.masuta2(v-for="productionlist in Production" v-bind:id="productionlist.id" ) {{productionlist.value}}
+              .F(v-show="is__select6")
+                li.masuta2(v-for="transferlist in Transfer" v-bind:id="transferlist.id" ) {{transferlist.value}}
+      br
+      form.program(name='program' action='/purchase3' onsubmit="return false;" method='POST')
+        .B
+          li.button(@click='kubun1' id='ku1') 入力/修正
+          li.button3(@click='kubun3' id='ku3') 削除
+          li.button(id='itiran') 一覧
+          p.ku(style='width:250px;') 現在の処理 : {{ kubun }}
+          hr(style="margin-bottom:10px;margin-top:10px")
+          label.koumoku
+            | 出荷日　　　　：
+            input.nyu(id='koumoku1' name='koumoku1' cmanCLDat='USE:ON,LANG:EN,FORM:3' type='text' value=`${koumoku1}` v-bind:readonly='is_readonly' autocomplete="off") 
+          label.koumoku
+            | 出荷伝票コード：
+            input.nyu(id='koumoku2' name='koumoku2' type='text', v-bind:readonly='syukkacode' value=`${koumoku2}` autocomplete="off" placeholder="入力時自動生成")
+          br
+          br
+          label.koumoku
+            | 得意先コード　：
+            input.nyu(id='customercode' name='koumoku3' type='text',  value=`${koumoku3}` autocomplete="off" v-bind:readonly='is_readonly' placeholder='コードを入力') 
+          label.koumoku
+            | 得意先名　　　：
+            input.nyu(id='customername'  name='koumoku6' type='text', v-bind:readonly='is_readonly' value=`${koumoku6}` autocomplete="off")
+          br
+          br
+          label.koumoku
+            | 担当コード　　：
+            input.nyu(id='koumoku4' name='koumoku4' type='text' value=`${koumoku4}` v-bind:readonly='is_readonly' autocomplete="off")
+          label.koumoku
+            | 担当者名　　　：
+            select.selectbox(id='koumoku7' name='jimulist' v-bind:readonly='is_readonly' onchange='selectboxChange(this.selectedIndex);')
+              option 　　
+              -for(let i = 0; i < list.length; i++)
+                option(id='jimuname'+`${i}`) #{list[`${i}`].jimuname}
+          br
+          br
+          label.koumoku
+            | 備考　　　　　：
+            input.nyu(id='koumoku5' name='koumoku5' type='text', v-bind:readonly='is_readonly', value=`${koumoku5}` style='width:520px' autocomplete="off")
+          br
+          br
+          hr
+          br
+          input(type='hidden' id="tantou" name="koumoku7" value=`${koumoku7}`)
+          nav.menu(style='width:710px;height:250px;margin-left:0px')
+              table.table(style='width:700px')
+                tr.tr
+                  th.th(style='width:50px') 番号
+                  th.th(style='width:150px') 商品コード
+                  th.th(style='width:400px') 商品名
+                  th.th(style='width:100px') 出荷数量
+                  -for(var i = 0;i < 8;i++)
+                    -var j = (i + 1) * 4 - 3
+                      tr.tr
+                        td.td(style='width:50px')
+                          input.tablenyu(id='table'+`${j}` name='table'+`${j}` value=`${i+1}` autocomplete="off" readonly)
+                        td.td(style='width:150px')
+                          input.tablenyu(id='table'+`${j+1}` name='table'+`${j+1}` value=`${list3[`${i}`][0]}` autocomplete="off")
+                        td.td(style='width:400px')
+                          input.tablenyu(id='table'+`${j+2}` name='table'+`${j+2}` value=`${list3[`${i}`][1]}` autocomplete="off")
+                        td.td(style='width:100px')
+                          input.tablenyu(id='table'+`${j+3}` name='table'+`${j+3}` value=`${list3[`${i}`][2]}` autocomplete="off")
+          hr(style='margin-top:260px;margin-bottom:20px')
+          .C
+            li.button2(id='mae' style='margin-left:-30px') 前伝票
+            li.button2(id='ato') 後伝票
+            li.button2(id='sub') 送信
+      .E(v-show='is__focus1')
+          -for(let i = 0; i < list.length; i++)
+              p(id='jimucode'+`${i}`) #{list[`${i}`].jimucode}
+          -for(let i = 0; i < list2.length; i++)
+              p(id='shocode'+`${i+1}`) #{list2[`${i}`].shohincode}
+              p(id='shoname'+`${i+1}`) #{list2[`${i}`].shohinname}
+
+    script(src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js')
+    script(src='script/program.js')
+    script(src='script/information.js')
+    script(src='script/syukka.js')

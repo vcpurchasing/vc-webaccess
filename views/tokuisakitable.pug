@@ -1,0 +1,41 @@
+html(lang='ja')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1.0')
+    link(rel="stylesheet" href="css/styles.css")
+    link(rel='icon', type='image/ png', size='16x16', href='image/vcicon.png')
+    title #{title}
+  body
+    header 
+      li.top #{title}
+    #app
+      form.program(name='program' action='/tokuisakitable1' method='POST' style='margin:20px')
+        input(type="hidden" id="tokucode" name='tokucode')
+        input(type="hidden" id="tokuname" name='tokuname')
+        .B
+          span.koumoku(id='search') 得意先名・コード検索　　　：
+          input.nyu(name='koumoku1' id='koumoku' type='text' autocomplete="off" placeholder='Enterキーで検索') 
+        .E
+          nav.menu(style='width:1200px;height:500px;margin-left:-20px;margin-top:-30px')
+            ul.list
+              table.table
+                tr.tr 
+                  th.th(style='width:130px') #{midasi1}
+                  th.th(style='width:350px') #{midasi2}
+                  th.th(style='width:130px') #{midasi3}
+                  th.th(style='width:350px') #{midasi4}
+                  th.th(style='width:150px') #{midasi5}
+                - var x = 1
+                each tokuisaki in list
+                  tr.tr 
+                    td.td( id='tokucode'+`${x}` ondblclick='dbl(event.target.innerText,event.target.id)') #{tokuisaki.得意先コード}
+                    td.td #{tokuisaki.得意先名1}
+                    td.td #{tokuisaki.郵便番号}
+                    td.td #{tokuisaki.住所1}
+                    td.td #{tokuisaki.電話番号}   
+                    - x++ 
+    script(src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js')
+    script(src='script/program.js')
+    script(src='script/tokuisakitable.js')
+    
+    

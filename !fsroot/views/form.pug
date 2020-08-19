@@ -1,0 +1,21 @@
+html(lang='ja' style='background:#e9e9e9')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1.0')
+    link(rel="stylesheet" href="css/styles.css")
+    link(rel='icon', type='image/ png', size='16x16', href='image/vcicon.png')
+    title #{title}
+  body.body
+    .form-wrapper
+        h1.h1 サインイン
+            form.form(action="/login" method="POST")
+                .form-item
+                    label(for='email')
+                        input(type='email', name='email', required='required', placeholder='Email Address')
+                .form-item
+                    label(for='password')
+                        input(type='password', name='password', required='required', placeholder='Password')
+                .button-panel
+                    input.button1(type='submit', title='Sign In', value='Sign In')
+                .form-footer
+                    p #{alert}

@@ -1,0 +1,556 @@
+html{
+  background-color: rgb(243, 243, 243);
+}
+hr {
+  height:0px;
+  border-radius: 2px;
+  border: 2px solid hsl(0, 0%, 60%);
+  width: 100%;
+}
+h2{
+  color: rgb(56, 56, 56);
+  margin-bottom:20px;
+  margin-left:40px;
+  padding: .25em 0 .2em .75em;
+  border-left: 6px solid #5c9ee7;;
+  border-bottom: 4px solid #ccc;
+  text-shadow:  1px 1.3px gray;
+}
+.button2 {
+    padding: 0.8em 1em;
+    border-radius: 3px;
+    display: inline-block;
+    height:10px;
+    text-align: center;
+    background-color: #9ec34b;
+    font-size: 16px;
+    line-height: 5px;
+    color: #FFF;
+    text-decoration: none;
+    font-weight: bold;
+    border: 2px solid #9ec34b;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.button2:active {
+/*ボタンを押したとき*/
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);/*下に動く*/
+    border-bottom: none;/*線を消す*/
+}
+.button2:after{
+    width: 100%;
+    height: 0;
+    content:"";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background : #FFF;
+    opacity: 0;
+    transform: translateX(-50%) translateY(-50%) rotate(45deg);
+    transition: .2s;
+    z-index: -1;
+}
+.button2:hover{
+    color: #9ec34b;
+}
+.button2:hover:after{
+    height: 140%;
+    opacity: 1;
+}
+.button2:active:after{
+    height: 340%;
+    opacity: 1;
+}
+.button3 {
+  padding: 0.8em 1em;
+  border-radius: 3px;
+  display: inline-block;
+  height:10px;
+  text-align: center;
+  background-color: #c34b4b;
+  font-size: 16px;
+  line-height: 5px;
+  color: #FFF;
+  text-decoration: none;
+  font-weight: bold;
+  border: 2px solid #c34b4b;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.button3:active {
+/*ボタンを押したとき*/
+  -webkit-transform: translateY(4px);
+  transform: translateY(4px);/*下に動く*/
+  border-bottom: none;/*線を消す*/
+}
+.button3:after{
+  width: 100%;
+  height: 0;
+  content:"";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background : #FFF;
+  opacity: 0;
+  transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  transition: .2s;
+  z-index: -1;
+}
+.button3:hover{
+  color: #c34b4b;
+}
+.button3:hover:after{
+  height: 140%;
+  opacity: 1;
+}
+.button3:active:after{
+  height: 340%;
+  opacity: 1;
+}
+.button {
+    padding: 0.8em 1em;
+    border-radius: 3px;
+    display: inline-block;
+    height:10px;
+    text-align: center;
+    background-color: #9ec34b;
+    font-size: 16px;
+    line-height: 7px;
+    color: #FFF;
+    text-decoration: none;
+    font-weight: bold;
+    border: 2px solid #9ec34b;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.button:active {
+/*ボタンを押したとき*/
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);/*下に動く*/
+    border-bottom: none;/*線を消す*/
+}
+.button:after{
+    width: 100%;
+    height: 0;
+    content:"";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background : #FFF;
+    opacity: 0;
+    transform: translateX(-50%) translateY(-50%) rotate(45deg);
+    transition: .2s;
+    z-index: -1;
+}
+.button:hover{
+  color: #9ec34b;
+}
+.button:hover:after{
+    height: 200%;
+    opacity: 1;
+}
+.button:active:after{
+    height: 340%;
+    opacity: 1;
+}
+ul{
+  margin-left:20px
+}
+.masuta{
+    color: #404040;
+    border-left: solid 6px #1fa67a;/*左側の線*/
+    border-bottom: solid 2px #dadada;/*下に灰色線*/
+    background: white;
+    margin-bottom: 5px;/*下のバーとの余白*/
+    line-height: 1.0;
+    padding: 0.5em;
+    list-style-type: none!important;/*ポチ消す*/
+    font-weight: bold;
+    font-size: 18px;
+    width: 170px;
+    transition: all 0.5s ease 0s;
+    cursor: pointer;
+}
+.masuta:first-child{
+  margin-top:20px
+}
+.masuta:hover {
+    color: #4CAF50;
+}
+.masuta2{
+  color: #404040;
+  border-left: solid 6px #664caf;/*左側の線*/
+  border-bottom: solid 2px #dadada;/*下に灰色線*/
+  background: white;
+  margin-bottom: 5px;/*下のバーとの余白*/
+  margin-left:0px;
+  line-height: 1.0;
+  padding: 0.5em;
+  list-style-type: none!important;/*ポチ消す*/
+  font-weight: bold;
+  font-size: 18px;
+  width: 187px;
+  transition: all 0.5s ease 0s;
+  cursor: pointer;
+}
+.masuta2:first-child{
+  margin-top:20px
+}
+.masuta2:last-child{
+  margin-bottom:20px
+}
+.masuta2:hover {
+  color: #664caf;
+}
+.plus{
+  transition: filter 0.5s ease;
+}
+.plus:hover {
+  filter: invert(17%) sepia(91%) saturate(1085%) hue-rotate(128deg) brightness(100%) contrast(90%);
+}
+.delete{
+  transition: filter 0.7s ease;
+}
+.delete:hover {
+  filter: invert(17%) sepia(91%) saturate(5000%) hue-rotate(10deg) brightness(100%) contrast(90%);
+}
+.A{
+    float: left;
+    width: 430px;
+}
+.B{
+    margin:30px;
+    width: 700px;
+    z-index: 0;
+}
+.C{
+    margin-left: 460px;
+    
+}
+.D{
+    float: left;
+    width: 45%;
+}
+.E{
+  margin:30px;
+    float: left;
+}
+.F{
+  float: left;
+  width: 45%;
+}
+.G{
+    z-index: 10;
+}
+.koumoku{
+  margin-right:25px;
+  padding: .25em 0 .2em .75em;
+  border-left: 6px solid #5c9ee7;
+  border-bottom: 1px solid #ccc;
+}
+.kubun {
+    padding-left: 40px;
+    padding-bottom: 5px;
+}
+.kubunmei {
+    padding-left: 165px;
+    padding-bottom: 5px;
+}
+.app {
+    height: 100%;
+    min-height: 100vh;
+    position: relative;/*←相対位置*/
+    padding-bottom: 120px;/*←footerの高さ*/
+    box-sizing: border-box;
+}
+.ku{
+    color: black;
+    width: 250px;
+    margin:10px 0 0 auto;
+    margin-top: -30px;
+    background: #f1f8ff;/*バーの色*/
+    line-height: 1.0;
+    padding: 0.5em;
+    text-align: center;
+    border-left : solid 15px #5c9ee7;/*先の色＝アイコン裏の色*/
+    list-style-type: none!important;
+  }
+  
+.ku:before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f303";
+    position: absolute;
+    padding: 0.5em;
+    color: white; /*アイコン色*/
+    font-weight: normal;/*アイコンは太字にしない*/
+    text-align: center;
+    left : -35px; /*左端からのアイコンまでの距離*/
+    /*以下 上下中央寄せのため*/
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+.menu{
+  float: left;
+  top: 0px;
+  left: 0px;
+  width: 420px;
+  height: 60vh;
+  margin-left:20px;
+  
+  /* 縦方向のスクロールバーを表示 */
+  overflow-y: scroll;
+
+  /* IE などのスクロールバーの色設定 */
+  scrollbar-face-color: #999;
+  scrollbar-track-color: #f3f3f3;
+
+  /* スマホ用の慣性スクロール */
+  -webkit-overflow-scrolling: touch;
+}
+.program{
+    float: left;
+    background-color: white;
+    margin: 50px;
+    margin-top: 0px;
+    margin-left:70px;
+    box-shadow: 0 0 8px gray;
+}
+::-webkit-scrollbar{
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb{
+    background: #ccc;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 2px #fff;
+ }
+ .footer{
+     margin-top: 730px;
+     margin-left: -300px;
+ }
+header {
+    width: 100%;
+    height: 60px;
+    background-color: #403e47;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    text-align: center;
+    font-size: 28px;
+}
+
+* {
+   margin: 0; padding: 0; box-sizing: border-box; 
+}
+.body {
+  background: #e9e9e9;
+  color: #5e5e5e;
+  font: 10px 'Open Sans', sans-serif;
+}
+.form-wrapper {
+  background: #fafafa;
+  margin: 3em auto;
+  padding: 0 1em;
+  margin-top: 150px;
+  max-width: 370px;
+}
+
+.h1 {
+  text-align: center;
+  padding: 1em 0;
+  
+}
+
+.form {
+  padding: 0 1.5em;
+  margin-top: 30px;
+}
+
+.form-item {
+  margin-bottom: 0.75em;
+  width: 100%;
+}
+
+.form-item input {
+  background: #fafafa;
+  border: none;
+  border-bottom: 2px solid #e9e9e9;
+  color: #666;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+  height: 50px;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+
+.form-item input:focus {
+  border-bottom: 2px solid #c0c0c0;
+  outline: none;
+}
+
+.button-panel {
+  margin: 2em 0 0;
+  width: 100%;
+}
+
+.button-panel .button1 {
+  background: #f16272;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  height: 50px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2em;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-transform: uppercase;
+  transition: background 0.3s ease-in-out;
+  width: 100%;
+}
+
+.button1:hover {
+  background: #ee3e52;
+}
+
+.form-footer {
+  font-size: 1em;
+  padding: 2em 0;
+  text-align: center;
+}
+
+.form-footer a {
+  color: #8c8c8c;
+  text-decoration: none;
+  transition: border-color 0.3s;
+}
+
+.form-footer a:hover {
+  border-bottom: 1px dotted #8c8c8c;
+}
+.table{
+  border-collapse:separate;
+  border-spacing: 0;
+}
+
+.th:first-child{
+  border-radius: 5px 0 0 0;
+}
+
+.th:last-child{
+  border-radius: 0 5px 0 0;
+  border-right: 1px solid #3c6690;
+}
+.th{
+  text-align: center;
+  color:white;
+  background: linear-gradient(#829ebc,#225588);
+  border-left: 1px solid #3c6690;
+  border-top: 1px solid #3c6690;
+  border-bottom: 1px solid #3c6690;
+  box-shadow: 0px 1px 1px rgba(255,255,255,0.3) inset;
+  padding: 6px 0;
+}
+
+.td{
+  text-align: center;
+  border-left: 1px solid #a8b7c5;
+  border-bottom: 1px solid #a8b7c5;
+  border-top:none;
+  padding: 5px;
+}
+
+.td:last-child{
+  border-right: 1px solid #a8b7c5;
+}
+.td2{
+  text-align: center;
+  border-left: 1px solid #a8b7c5;
+  border-bottom: 1px solid #a8b7c5;
+  border-top:none;
+  padding: 5px;
+  background-color:gray;
+}
+
+.td2:last-child{
+  border-right: 1px solid #a8b7c5;
+}
+
+.tr {
+  line-height:20px;
+}
+.tr:last-child td:first-child {
+  border-radius: 0 0 0 5px;
+}
+
+.tr:last-child td:last-child {
+  border-radius: 0 0 5px 0;
+}
+li.TOP {
+  text-shadow: 1px 2px 3px #808080;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  list-style: none;
+  margin-top: 10px;
+  margin-left: 50px;
+  float: left;
+  color: white;
+  position: relative;
+  cursor: pointer;
+}
+li.TOP::after {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: white;
+  transform: scale(0, 1);
+  transform-origin: center top;
+  transition: transform .3s;
+}
+li.TOP:hover::after {
+  transform: scale(1, 1);
+}
+.tablenyu {
+  font-size: 17px;
+  text-align: center;
+  border:none;
+  width: 100%;
+  height: 20px;
+  background-color:transparent;
+}
+.nyu{
+  font-size: 14px;
+  text-indent: 2px;
+  height: 30px;
+}
+.selectbox{
+  height: 30px;
+}
+li.TOPs {
+  text-shadow: 1px 2px 3px #808080;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  list-style: none;
+  margin-top: 10px;
+  margin-left: 50px;
+  float: left;
+  color: white;
+  position: relative;
+  cursor: pointer;
+}
+.box {
+  padding: 0.15em 1em;
+  margin: 2em 0;
+  color: #000000;
+  background: #ffffff;/*背景色*/
+  border-top: solid 6px #1dc1d6;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);/*影*/
+}

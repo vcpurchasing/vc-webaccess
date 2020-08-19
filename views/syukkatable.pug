@@ -1,0 +1,59 @@
+html(lang='ja')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1.0')
+    link(rel="stylesheet" href="css/styles.css")
+    link(rel='icon', type='image/ png', size='16x16', href='image/vcicon.png')
+    script(src='script/cmanCalendar_v093.js')
+    title #{title}
+  body
+    header 
+      li.top #{title}
+    #app
+      form.program(name='program' action='/syukkatable1' method='POST' style='margin:20px')
+        .B
+          input(type='hidden' id='code' name='syukkacode')
+          p.koumoku(style='height:35px;margin-bottom:10px') 出荷日　　　　：
+            input.nyu(name='kikan1' id='koumoku1' cmanCLDat='USE:ON,LANG:EN,FORM:3' type='text' autocomplete="off" style="width:100px") 
+            span 　～　
+            input.nyu(name='kikan2' id='koumoku2' cmanCLDat='USE:ON,LANG:EN,FORM:3' type='text' autocomplete="off" style="width:100px") 
+          p.koumoku(style='height:35px;margin-bottom:10px') 得意先コード　：
+            input.nyu(name='tokucode' id='koumoku3' type='text' autocomplete="off" style="width:100px") 
+          p.koumoku(style='height:35px;margin-bottom:10px') 商品コード　　：
+            input.nyu(name='shocode' id='koumoku4' type='text' autocomplete="off" style="width:100px")
+          li.button2(id='sub' style="margin-top:20px") 検索
+        .E(style='margin-left:10px;margin-top:-10px')
+          nav.menu(style='width:1500px;height:570px')
+            table.table(style='width:1400px;')
+              tr.tr 
+                th.th(style='width:150px;height:30px') #{midasi1}
+                th.th(style='width:120px') #{midasi2}
+                th.th(style='width:100px') #{midasi3}
+                th.th(style='width:250px') #{midasi4}
+                th.th(style='width:100px') #{midasi5}
+                th.th(style='width:250px') #{midasi6}
+                th.th(style='width:70px') #{midasi7}
+                th.th(style='width:90px') #{midasi8}
+                th.th(style='width:90px') #{midasi9}
+                td.th(hidden)
+                th.th(style='width:60px') #{midasi10}
+                
+              - var x = 1
+                  each syumei in list
+                    -y = (x * 11) - 10
+                    tr.tr(styleheight:30px)
+                      td.td(style='width:150px;height:50px' id='syucode'+`${y}` ondblclick='dbl(event.target.innerText,event.target.id,event)') #{syumei.syukkacode}
+                      td.td(style='width:120px' id='syucode'+`${y+1}`) #{syumei.syukkadate}
+                      td.td(style='width:100px' id='syucode'+`${y+2}`) #{syumei.tokuisakicode}
+                      td.td(style='width:250px' id='syucode'+`${y+3}`) #{syumei.tokuisakiname}
+                      td.td(style='width:100px' id='syucode'+`${y+4}`) #{syumei.shohincode}
+                      td.td(style='width:250px' id='syucode'+`${y+5}`) #{syumei.shohinname}
+                      td.td(style='width:70px' id='syucode'+`${y+6}`) #{syumei.quantity}
+                      td.td(style='width:90px' id='syucode'+`${y+7}`) #{syumei.tantoucode}
+                      td.td(style='width:90px' id='syucode'+`${y+8}`) #{syumei.jimuname}
+                      td.td(hidden id='syucode'+`${y+9}`) #{syumei.bikou}
+                      td.td(style='width:60px' id='syucode'+`${y+10}`) #{syumei.flg}
+                      - x++ 
+    script(src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js')
+    script(src='script/program.js')
+    script(src='script/syukkatable.js')

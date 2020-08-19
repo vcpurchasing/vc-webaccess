@@ -1,0 +1,33 @@
+html(lang='ja')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1.0')
+    link(rel="stylesheet" href="css/styles.css")
+    link(rel='icon', type='image/ png', size='16x16', href='image/vcicon.png')
+    title #{title}
+  body
+    header 
+      li.top #{title}
+    #app
+      form.program(name='program' action='productitemtable1' method='POST' style='margin:20px')
+        .B
+          label.koumoku(id='search') 商品名・コード検索　　　　：
+          input.nyu(name='koumoku1' id='koumoku' type='text' autocomplete="off" placeholder='Enterキーで検索') 
+        .E
+          nav.menu(style='width:700px;height:500px;margin-left:-20px;margin-top:-30px')
+            ul.list
+              table.table
+                tr.tr 
+                  th.th(style='width:170px') #{midasi1}
+                  th.th(style='width:350px') #{midasi2}
+                  th.th(style='width:170px') #{midasi3}
+                - var x = 1
+                each productitem in list
+                  tr.tr 
+                    td.td( id='productitemcode'+`${x}` ondblclick='dbl(event.target.innerText,event.target.id)') #{productitem.shohincode}
+                    td.td #{productitem.shohinname}
+                    td.td #{productitem.itemNo}
+                    - x++ 
+    script(src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js')
+    script(src='script/program.js')
+    script(src='script/productitemtable.js')

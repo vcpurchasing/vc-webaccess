@@ -1,0 +1,50 @@
+html(lang='ja')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1.0')
+    link(rel="stylesheet" href="css/styles.css")
+    link(rel='icon', type='image/ png', size='16x16', href='image/vcicon.png')
+    title #{title}
+  body
+    header 
+      li.TOP(id='top') ＴＯＰ
+      li.TOPs ＞＞
+      li.TOP(id='top' ) #{title}
+    #app
+      .A
+        br
+        h2 プログラム一覧
+          br
+        nav.menu(style='border-top: solid #1e366a 1px;border-bottom: solid #1e366a 1px;margin-left:39px')
+            ul.list
+              .D
+                li.masuta(v-for="list in lists" v-on:mouseover="loadlist(list.method)" v-bind:id="list.id") {{list.value}}
+              .F(v-show="is__select1")
+                li.masuta2(v-for="masutalist in masuta" v-bind:id="masutalist.id") {{masutalist.value}}
+              .F(v-show="is__select2")
+                li.masuta2(v-for="Salelist in Sales" v-bind:id="Salelist.id") {{Salelist.value}}
+              .F(v-show="is__select3")
+                li.masuta2(v-for="Purchaselist in Purchase" v-bind:id="Purchaselist.id") {{Purchaselist.value}}
+              .F(v-show="is__select4")
+                li.masuta2(v-for="stocklist in Stock" v-bind:id="stocklist.id") {{stocklist.value}}
+              .F(v-show="is__select5")
+                li.masuta2(v-for="productionlist in Production" v-bind:id="productionlist.id") {{productionlist.value}}
+              .F(v-show="is__select6")
+                li.masuta2(v-for="transferlist in Transfer" v-bind:id="transferlist.id") {{transferlist.value}}
+      br
+      form.program(name='program' action='/rate1' onsubmit="return false;" method='POST' )
+        .B(style="width:700px")
+          li.button(id='sub') 送信
+          span.p-country-name(style="display:none;") Japan
+          p.ku(style='width:250px;') 現在の処理 : {{ kubun }}
+          hr(style="margin-bottom:10px;margin-top:10px")
+          label.koumoku
+            | 為替登録　　　　：
+            input.nyu(id='rate' name='koumoku[]' size="10" onblur='numts(event.target.value,event.target.id)' type='text', value=`${koumoku[0]}` autocomplete="off") 
+            span(style='font-size:13px;')  円/＄
+          input(id='jun' value=`${jun}` hidden)
+    script(src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js')
+    script(src='script/program.js')
+    script(src='script/rate.js')
+    script(src='script/information.js')
+    

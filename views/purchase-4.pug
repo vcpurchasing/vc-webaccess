@@ -1,0 +1,256 @@
+html(lang='ja')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1.0')
+    link(rel="stylesheet" href="css/styles.css")
+    link(rel='icon', type='image/ png', size='16x16', href='image/vcicon.png')
+    script(src='script/cmanCalendar_v093.js')
+    script(type='text/javascript').
+      function selectboxChange(a,th) {
+        document.getElementById("jimucode").value = document.getElementById("jimucode" + (a - 1)).innerText
+        document.getElementById("jimu").value = th.value
+      }  
+      function selectboxChange1(a,th) {
+        document.getElementById("order").value = th.value
+      } 
+      function selectboxChange2(a,th) {
+        document.getElementById("salecode").value = document.getElementById("salecode" + (a - 1)).innerText
+        document.getElementById("sale").value = th.value
+      } 
+      function selectboxChange3(a,th) {
+        document.getElementById("pursumcode").value = document.getElementById("pursumcode" + (a - 1)).innerText
+        document.getElementById("pursum").value = th.value
+      } 
+      function selectboxChange4(a,th,e) {
+        document.getElementsByClassName('tr')[e-1].getElementsByTagName('td')[10].getElementsByTagName('input')[0].value = document.getElementById("loccode" + (a - 1)).innerText
+        document.getElementById("loc"+Math.floor(e/2)).value = th.value
+      } 
+    title #{title}
+  
+  body
+    header 
+      li.TOP(id='top') ＴＯＰ
+      li.TOPs ＞＞
+      li.TOP(id='top' ) #{title}
+    #app
+      .A
+        br
+        h2 プログラム一覧
+          br
+        nav.menu(style='border-top: solid #1e366a 1px;border-bottom: solid #1e366a 1px;margin-left:39px;')
+            ul.list
+              .D
+                li.masuta(v-for="list in lists" v-on:mouseover="loadlist(list.method)" v-bind:id="list.id" ) {{list.value}}
+              .F(v-show="is__select1")
+                li.masuta2(v-for="masutalist in masuta" v-bind:id="masutalist.id") {{masutalist.value}}
+              .F(v-show="is__select2")
+                li.masuta2(v-for="Salelist in Sales" v-bind:id="Salelist.id" ) {{Salelist.value}}
+              .F(v-show="is__select3")
+                li.masuta2(v-for="Purchaselist in Purchase" v-bind:id="Purchaselist.id" ) {{Purchaselist.value}}
+              .F(v-show="is__select4")
+                li.masuta2(v-for="stocklist in Stock" v-bind:id="stocklist.id" ) {{stocklist.value}}
+              .F(v-show="is__select5")
+                li.masuta2(v-for="productionlist in Production" v-bind:id="productionlist.id" ) {{productionlist.value}}
+              .F(v-show="is__select6")
+                li.masuta2(v-for="transferlist in Transfer" v-bind:id="transferlist.id" ) {{transferlist.value}}
+      br
+      form.program(name='program' action='/orderslip1' onsubmit="return false;" method='POST' )
+        input.nyu(name='authority' type='hidden' value=`${authority}`)
+        .B(style="width:1100px")
+          li.button(@click='kubun1' id='ku1') 入力/修正
+          li.button3(@click='kubun3' id='ku3') 削除
+          li.button 前伝票 
+          li.button 後伝票
+          li.button 検修削
+          li.button(id='sub') 送信
+          p.ku(style='width:250px;') 現在の処理 : {{ kubun }}
+          hr(style="margin-bottom:10px;margin-top:10px")
+          .hattyuli1(style="margin-bottom:10px;")
+            span
+              | 発注日 　 　 
+            span
+              | 発注伝票コード　　　 　　　　　　　
+            span
+              | 得意先コード　　　　　 　　　　　 　　　　　　　　
+            span
+              | 終了
+            br
+            span
+              input.nyu(id='koumoku1' name='koumoku[]' cmanCLDat='USE:ON,LANG:EN,FORM:3' type='text' value=`${koumoku[0]}` autocomplete="off" style='width:80px') 　
+            span
+              input.nyu(id='koumoku2' name='koumoku[]' type='text', value=`${koumoku[1]}` autocomplete="off" style='width:130px;margin-left:15px')
+            span
+              select.selectbox(id='orderlist' name='koumoku[]' style='width:120px;margin-left:15px' value=`${koumoku[2]}` onchange='selectboxChange1(this.selectedIndex,this);')
+                option New Order
+                option Repeat Order
+                option Revised Order
+            span
+              input.nyu(id='customercode' name='koumoku[]' type='text', value=`${koumoku[3]}` autocomplete="off" style='width:110px;margin-left:15px')
+            span
+              input.nyu(id='customername' name='koumoku[]' type='text', value=`${koumoku[4]}` autocomplete="off" style='width:250px;margin-left:15px')
+            span
+              input.nyu(id='koumoku5' name='koumoku[]' type='text' value=`${koumoku[5]}` autocomplete="off" tabindex='-1' style='width:50px;margin-left:17px')
+          .hattyuli2(style="margin-bottom:10px")
+            span
+              | 仕入先　 　　　　　　　　　　
+            span
+              | 　　 　　　  直送先　　　 　　　　　　　
+            span
+              | 　　　 　　　 荷送人
+            br
+            span
+              input.nyu(id='purchasecode' name='koumoku[]' type='text' value=`${koumoku[6]}` autocomplete="off" style='width:70px' onchange='focusmove(event)') 　
+            span
+              input.nyu(id='purchasename' name='koumoku[]' type='text', value=`${koumoku[7]}` autocomplete="off" style='width:220px;margin-left:15px' )
+            span
+              input.nyu(id='tyokusoucode' name='koumoku[]' type='text' value=`${koumoku[8]}` autocomplete="off" style='width:70px;margin-left:15px') 　
+            span
+              input.nyu(id='tyokusouname' name='koumoku[]' type='text', value=`${koumoku[9]}` autocomplete="off" style='width:220px;margin-left:15px')
+            span
+              input.nyu(id='shippercode' name='koumoku[]' type='text' value=`${koumoku[10]}` autocomplete="off" style='width:100px;margin-left:15px') 　
+            span
+              input.nyu(id='shippername' name='koumoku[]' type='text', value=`${koumoku[11]}` autocomplete="off" style='width:240px;margin-left:15px')
+          .hattyuli3(style="margin-bottom:10px")
+            span
+              | 担当者　　 　　　　　　 
+            span
+              | 事務　　　　　　 　　　　　　 
+            span
+              | 営業　　　　 　　　　　
+            span
+              | 摘要 
+            br
+            span
+              input.nyu(id='koumoku12' name='koumoku[]' type='text' value=`${koumoku[12]}` autocomplete="off" style='width:170px;') 　
+            span
+              input.nyu(id='jimucode' name='koumoku[]' type='text' value=`${koumoku[13]}` autocomplete="off" style='width:50px;margin-left:17px')
+            span
+              select.selectbox(id='jimulist' v-bind:readonly='is_readonly' style='width:150px;margin-left:15px;height:31px' onchange='selectboxChange(this.selectedIndex,this);')
+                option 　　
+                -for(let i = 0; i < list.length; i++)
+                  option(id='jimuname'+`${i}`) #{list[`${i}`].jimuname}
+            span
+              input.nyu(id='salecode' name='koumoku[]' type='text' value=`${koumoku[14]}` autocomplete="off" style='width:50px;margin-left:20px')
+            span
+              select.selectbox(id='salelist' v-bind:readonly='is_readonly'  style='width:100px;margin-left:15px;height:31px' onchange='selectboxChange2(this.selectedIndex,this);')
+                option 　　
+                -for(let i = 0; i < list3.length; i++)
+                  option(id='salename'+`${i}`) #{list3[`${i}`].salesname}
+            span
+              input.nyu(id='pursumcode' name='koumoku[]' type='text' value=`${koumoku[15]}` autocomplete="off" style='width:50px;margin-left:15px')
+            span
+              select.selectbox(id='pursumlist' v-bind:readonly='is_readonly' style='width:160px;margin-left:15px;height:31px' onchange='selectboxChange3(this.selectedIndex,this);')
+                option 　　
+                -for(let i = 0; i < list4.length; i++)
+                  option(id='pursumname'+`${i}`) #{list4[`${i}`].pursumname}
+          .hattyuli4(style="margin-bottom:10px")
+            span
+              | 連絡事項　　　　　　　　　　　　　　　　　　　　　　　　　
+            span
+              | 備考　　　　　　　　　　　　　　　　　　　　　　　　　　　
+            span
+              | 総金額
+            br
+            span
+              input.nyu(id='koumoku16' name='koumoku[]' type='text' value=`${koumoku[16]}` autocomplete="off" style='width:450px;')
+            span
+              input.nyu(id='koumoku17' name='koumoku[]' type='text' value=`${koumoku[17]}` autocomplete="off" style='width:450px;margin-left:15px')
+            span
+              input.nyu(id='koumoku18' type='text' name='koumoku[]' value=`${koumoku[18]}` autocomplete="off" tabindex='-1' style='width:90px;margin-left:15px;background-color:yellow')
+          hr(style="margin-bottom:10px")
+          nav.menu(style='width:1120px;height:350px;margin-left:0px')
+              table.table
+                tr.tr
+                  th.th(style='width:40px' rowspan="2") 番号
+                  th.th(style='width:40px' rowspan="2") 区分
+                  th.th(style='width:125px') 商品コード
+                  th.th(style='width:125px') アイテム名
+                  th.th(style='width:80px') 単価
+                  th.th(style='width:80px;') 注文数量
+                  th.th(style='width:100px') 売単価
+                  th.th(style='width:100px') レート
+                  th.th(style='width:100px') 物流経費
+                  th.th(style='width:100px') 仕入単価
+                  th.th(style='width:150px') 向地コード
+                  th.th(style='width:80px') 終了
+                tr.tr
+                  th.th(style='width:250px;border-radius: 0;' colspan="2") 商品名
+                  th.th(style='width:160px;' colspan="2") 金額＄
+                  th.th(style='width:100px') ピック日
+                  th.th(style='width:100px') 出荷日
+                  th.th(style='width:100px') 入荷日
+                  th.th(style='width:100px') 納品日
+                  th.th(style='width:150px') 向地名
+                  th.th(style='width:80px;border-radius: 0;') 実入荷数
+                  -for(var i = 0;i < 8;i++)
+                    -var j = (i + 1) * 19 - 18
+                      tr.tr
+                        td.td(style='width:40px;' rowspan="2")
+                          input.tablenyu(id='table'+`${j}` name='table[]' value=`${table[j-1]}`  tabindex='-1' autocomplete="off" readonly)
+                        td.td(style='width:40px' rowspan="2")
+                          input.tablenyu(id='table'+`${j+1}` name='table[]' value=`${table[j]}` autocomplete="off" onfocus='kubunonlyauto(event.path[2].rowIndex,1)')
+                        td.td(style='width:125px')
+                          input.tablenyu(id='table'+`${j+2}` name='table[]' value=`${table[j+1]}` autocomplete="off" onfocus='kubunonlyauto(event.path[2].rowIndex,1)' onKeyDown='products(event)')
+                        td.td(style='width:125px')
+                          input.tablenyu(id='table'+`${j+3}` name='table[]' value=`${table[j+2]}` autocomplete="off"  tabindex='-1')
+                        td.td(style='width:80px')
+                          input.tablenyu(id='table'+`${j+4}` name='table[]' value=`${table[j+3]}` autocomplete="off" onblur='numts(event.target.value,event.target.id)' onInput='sums3(event.path[2].rowIndex,5,4,1,"koumoku18",event.target.value)')
+                        td.td(style='width:80px')
+                          input.tablenyu(id='table'+`${j+5}` name='table[]' value=`${table[j+4]}` autocomplete="off" onblur='numts(event.target.value,event.target.id)' onInput='sums2(event.path[2].rowIndex,5,4,1,"koumoku18",event.target.value)')
+                        td.td2
+                          input.tablenyu(id='table'+`${j+6}` name='table[]' value=`${table[j+5]}` tabindex='-1' autocomplete="off" readonly)
+                        td.td2
+                          input.tablenyu(id='table'+`${j+7}` name='table[]' value=`${table[j+6]}` tabindex='-1' autocomplete="off" readonly)
+                        td.td2
+                          input.tablenyu(id='table'+`${j+8}` name='table[]' value=`${table[j+7]}` tabindex='-1' autocomplete="off" readonly)
+                        td.td2
+                          input.tablenyu(id='table'+`${j+9}` name='table[]' value=`${table[j+8]}` tabindex='-1' autocomplete="off" readonly)
+                        td.td2
+                          input.tablenyu(id='table'+`${j+10}` name='table[]' value=`${table[j+9]}` tabindex='-1' autocomplete="off" readonly)
+                        td.td(style='width:80px')
+                          input.tablenyu(id='table'+`${j+11}` name='table[]' value=`${table[j+10]}` autocomplete="off")
+                      tr.tr
+                        td.td(style='width:250px' colspan="2")
+                          input.tablenyu(id='table'+`${j+12}` name='table[]' value=`${table[j+11]}` autocomplete="off")
+                        td.td(style='width:160px' colspan="2")
+                          input.tablenyu(id='table'+`${j+13}` name='table[]' value=`${table[j+12]}` autocomplete="off")
+                        td.td(style='width:80px')
+                          input.tablenyu(id='table'+`${j+14}` name='table[]' value=`${table[j+13]}` cmanCLDat='USE:ON,LANG:EN,FORM:3,FUNC:DAY' autocomplete="off" readonly)
+                        td.td2
+                          input.tablenyu(id='table'+`${j+15}` name='table[]' value=`${table[j+14]}` ondblClick='DAY2(event.path[2].rowIndex)' tabindex='-1' autocomplete="off" readonly)
+                        td.td2
+                          input.tablenyu(id='table'+`${j+16}` name='table[]' value=`${table[j+15]}` tabindex='-1' autocomplete="off" readonly)
+                        td.td2
+                          input.tablenyu(id='table'+`${j+17}` name='table[]' value=`${table[j+16]}` tabindex='-1' autocomplete="off" readonly)
+                        td.td2
+                          input(type='hidden')
+                          select.selectbox(id='loclist'+`${i+1}` style='height:20px;display:none' tabindex='-1' readonly onchange='selectboxChange4(this.selectedIndex,this,event.path[2].rowIndex);')
+                            option 　 　　　
+                            -for(let i = 0; i < list5.length; i++)
+                              option(id='locname'+`${i}`) #{list5[`${i}`].locationname}
+                        td.td(style='width:80px')
+                          input.tablenyu(id='table'+`${j+18}` name='table[]' value=`${table[j+17]}` autocomplete="off")
+          hr(style="margin-bottom:10px;border:none;")
+        .E(v-show='is__focus1' type='hidden')
+          -for(let i = 0; i < list.length; i++)
+              p(id='jimucode'+`${i}`) #{list[`${i}`].jimucode}
+          -for(let i = 0; i < list3.length; i++)
+              p(id='salecode'+`${i}`) #{list3[`${i}`].salescode}
+          -for(let i = 0; i < list4.length; i++)
+              p(id='pursumcode'+`${i}`) #{list4[`${i}`].pursumcode}
+          -for(let i = 0; i < list5.length; i++)
+              p(id='loccode'+`${i}`) #{list5[`${i}`].locationcode}
+          input.nyu(name='authority' type='hidden' value=`${authority}`)
+          input(id='jun' value=`${jun}`)
+          input.nyu(id='foreign' name='koumoku[]' type='hidden' value=`${koumoku[19]}`)
+          input.nyu(id='jimu' name='koumoku[]' type='hidden' value=`${koumoku[20]}`)
+          input.nyu(id='sale' name='koumoku[]' type='hidden' value=`${koumoku[21]}`)
+          input.nyu(id='pursum' name='koumoku[]' type='hidden' value=`${koumoku[22]}`)
+          input.nyu(id='citycode' name='koumoku[]' type='hidden' value=`${koumoku[23]}`)
+          input.nyu(id='order' name='koumoku[]' type='hidden' value=`${koumoku[24]}`)
+          -for(let i = 0; i < 8; i++)
+            input(id='loc'+`${i+1}` name='koumoku[]' value=`${koumoku[25+i]}`)
+    script(src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js')
+    script(src='script/program.js')
+    script(src='script/hattyu.js')
+    script(src='script/information.js')

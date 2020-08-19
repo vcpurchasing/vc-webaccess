@@ -1,0 +1,50 @@
+html(lang='ja')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width,initial-scale=1.0')
+    link(rel="stylesheet" href="css/styles.css")
+    link(rel='icon', type='image/ png', size='16x16', href='image/vcicon.png')
+    title #{title}
+  body
+    header 
+      li.top #{title}
+    #app
+      form.program(name='program' action='/tyokusoutable1' method='POST' style='margin:20px;height:870px')
+        .B
+          label.koumoku(id='search') 直送先名検索　　　：
+          input.nyu(name='koumoku1' id='koumoku' type='text' autocomplete="off" placeholder='Enterキーで検索') 
+        .E
+          nav.menu(style='width:1260px;height:700px;margin-left:-20px;margin-top:-30px')
+            ul.list
+              table.table
+                tr.tr 
+                  th.th(style='width:130px') #{midasi1}
+                  th.th(style='width:400px') #{midasi2}
+                  th.th(style='width:130px') #{midasi3}
+                  th.th(style='width:400px') #{midasi4}
+                  th.th(style='width:200px') #{midasi5}
+                - var x = 1
+                each tyokusou in list
+                  tr.tr 
+                    td.td( id='tyokucode'+`${x}` ondblclick='dbl(event.target.innerText,event.target.id)') #{tyokusou.directdeliverycode}
+                    td.td #{tyokusou.directdeliveryname}
+                    td.td(hidden) #{tyokusou.directdeliveryfuri}
+                    td.td #{tyokusou.postnumber}
+                    td.td #{tyokusou.directdeliveryfrom1}
+                    td.td(hidden) #{tyokusou.directdeliveryfrom2}
+                    td.td #{tyokusou.tel}   
+                    td.td(hidden) #{tyokusou.fax}
+                    td.td(hidden) #{tyokusou.note}
+                    td.td(hidden) #{tyokusou.directdeliveryname2}
+                    - x++ 
+        input(id='tablecnt' name='tablecnt' type='hidden' value=`${tablecnt}`)
+        input(type='button' id='top' style='margin-left:100px;width:30px' onclick='plus(event)' value=1)  
+        input(type='button' id='t1' style='margin-left:50px;width:30px' onclick='plus(event)' value=`${tablecnt-2}`)
+        input(type='button' id='t2' style='margin-left:20px;width:30px' onclick='plus(event)' value=`${tablecnt-1}`)
+        input(type='button' id='t3' style='margin-left:20px;width:30px' onclick='plus(event)' value=`${tablecnt}`)
+        input(type='button' id='t4' style='margin-left:20px;width:30px' onclick='plus(event)' value=`${tablecnt+1}`)
+        input(type='button' id='t5' style='margin-left:20px;width:30px' onclick='plus(event)' value=`${tablecnt+2}`)  
+        input(type='button' id='last' name='lasted' style='margin-left:50px;width:30px' onclick='plus(event)' value=`${last}`)  
+    script(src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js')
+    script(src='script/program.js')
+    script(src='script/tyokusoutable.js')
